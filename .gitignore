@@ -2,3 +2,8 @@ PizzaMVCApplication/bin
 PizzaMVCApplication.Entity/bin
 PizzaMVCApplication.Persistence/bin
 PizzaMVCApplication.Services/bin
+PizzaMVCApplication/obj/Debug
+PizzaMVCApplication.Entity/obj/Debug
+PizzaMVCApplication.Persistence/obj/Debug
+PizzaMVCApplication.Services/obj/Debug
+.vs
