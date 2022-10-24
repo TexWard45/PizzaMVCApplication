@@ -13,6 +13,18 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+i.fa-solid {
+    line-height: unset;
+}
+
+i.fa-brands {
+    line-height: unset;
+}
+
+.nav-link:hover {
+    cursor: pointer;
+}
+
+.form-child-full-height > form {
+    height: 100%;
 }

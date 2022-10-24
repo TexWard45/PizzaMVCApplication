@@ -1,0 +1,60 @@
+﻿@model IList<UserGroupIndexViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+    ViewData["Type"] = "UserGroup";
+    ViewData["Title"] = "Quản lý nhóm tài khoản";
+    ViewData["Column"] = new string[] {
+        "Mã nhóm",
+        "Tên nhóm",
+    };
+}
+
+@{
+    Layout = "_AdminLayout";
+}
+
+@using (Html.BeginForm("Index", "UserGroup", FormMethod.Post))
+{
+<div class="d-flex flex-column p-3 h-100">
+    <div class="d-flex justify-content-between align-items-center">
+        <p class="h3 m-0"> @ViewData["Title"] </p>
+
+        <div>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Search", "UserGroup")'"> <i class="fs-5 bi bi-search"></i> </button>
+            <button type="submit" value="info" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-info-lg"></i> </button>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Create", "UserGroup")'"> <i class="fs-5 bi bi-plus-lg"></i> </button>
+            <button type="submit" value="edit" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-pencil-fill"></i> </button>
+            <button type="submit" value="delete" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-trash-fill"></i> </button>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="mb-auto">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    @foreach (string column in (string[]) @ViewData["Column"])
+                    {
+                        <th scope="col">@column</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.CheckBoxFor(m => m[i].Checked, new { @class="form-check-input" }) </td>
+                        <td>@Html.HiddenFor(m => m[i].GroupId) @Html.DisplayFor(m => m[i].GroupId)</td>
+                        <td>@Html.HiddenFor(m => m[i].Display) @Html.DisplayFor(m => m[i].Display)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+</div>
+}

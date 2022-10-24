@@ -1073,6 +1073,43 @@
             "rid": "win"
           }
         }
+      },
+      "PizzaMVCApplication.Entity/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "6.0.10",
+          "Microsoft.EntityFrameworkCore": "6.0.10",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.10"
+        },
+        "compile": {
+          "bin/placeholder/PizzaMVCApplication.Entity.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PizzaMVCApplication.Entity.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "PizzaMVCApplication.Persistence/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "6.0.10",
+          "Microsoft.EntityFrameworkCore": "6.0.10",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.10",
+          "PizzaMVCApplication.Entity": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/PizzaMVCApplication.Persistence.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PizzaMVCApplication.Persistence.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -2768,6 +2805,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "PizzaMVCApplication.Entity/1.0.0": {
+      "type": "project",
+      "path": "../PizzaMVCApplication.Entity/PizzaMVCApplication.Entity.csproj",
+      "msbuildProject": "../PizzaMVCApplication.Entity/PizzaMVCApplication.Entity.csproj"
+    },
+    "PizzaMVCApplication.Persistence/1.0.0": {
+      "type": "project",
+      "path": "../PizzaMVCApplication.Persistence/PizzaMVCApplication.Persistence.csproj",
+      "msbuildProject": "../PizzaMVCApplication.Persistence/PizzaMVCApplication.Persistence.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2776,7 +2823,9 @@
       "Microsoft.EntityFrameworkCore >= 6.0.10",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.10",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.10",
-      "Microsoft.EntityFrameworkCore.Tools >= 6.0.10"
+      "Microsoft.EntityFrameworkCore.Tools >= 6.0.10",
+      "PizzaMVCApplication.Entity >= 1.0.0",
+      "PizzaMVCApplication.Persistence >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2805,7 +2854,14 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Entity\\PizzaMVCApplication.Entity.csproj": {
+              "projectPath": "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Entity\\PizzaMVCApplication.Entity.csproj"
+            },
+            "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Persistence\\PizzaMVCApplication.Persistence.csproj": {
+              "projectPath": "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Persistence\\PizzaMVCApplication.Persistence.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

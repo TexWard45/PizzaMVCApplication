@@ -199,7 +199,14 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Entity\\PizzaMVCApplication.Entity.csproj": {
+                "projectPath": "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Entity\\PizzaMVCApplication.Entity.csproj"
+              },
+              "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Persistence\\PizzaMVCApplication.Persistence.csproj": {
+                "projectPath": "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Persistence\\PizzaMVCApplication.Persistence.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -306,6 +313,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
               "version": "[6.0.10, )"

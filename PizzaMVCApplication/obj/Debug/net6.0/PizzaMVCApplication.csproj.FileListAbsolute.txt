@@ -379,7 +379,6 @@ D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.
 D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.0\PizzaMVCApplication.RazorAssemblyInfo.cs
 D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.0\staticwebassets.build.json
 D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.0\staticwebassets.development.json
-D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.0\scopedcss\bundle\PizzaMVCApplication.styles.css
 D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.0\scopedcss\projectbundle\PizzaMVCApplication.bundle.scp.css
 D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.0\PizzaMVCApplication.csproj.CopyComplete
@@ -388,3 +387,12 @@ D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.
 D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.0\PizzaMVCApplication.pdb
 D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.0\PizzaMVCApplication.genruntimeconfig.cache
 D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.0\ref\PizzaMVCApplication.dll
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\obj\Debug\net6.0\scopedcss\Views\Shared\_AdminLayout.cshtml.rz.scp.css
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\bin\Debug\net6.0\System.Web.Mvc.dll
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\bin\Debug\net6.0\System.Web.Razor.dll
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\bin\Debug\net6.0\System.Web.Helpers.dll
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\bin\Debug\net6.0\System.Web.WebPages.dll
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll
