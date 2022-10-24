@@ -1,0 +1,71 @@
+﻿@model IList<OrderIndexViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+    ViewData["Type"] = "Order";
+    ViewData["Title"] = "Quản lý đơn hàng";
+    ViewData["Column"] = new string[] {
+        "Mã đơn hàng",
+        "Trạng thái",
+        "Thời gian đặt",
+        "Thời gian xử lý lần cuối",
+        "Người mua",
+        "Người xử lý",
+        "Tổng giá",
+        "Tổng số lượng"
+    };
+}
+
+@{
+    Layout = "_AdminLayout";
+}
+
+@using (Html.BeginForm("Index", "Order", FormMethod.Post))
+{
+<div class="d-flex flex-column p-3 h-100">
+    <div class="d-flex justify-content-between align-items-center">
+        <p class="h3 m-0"> @ViewData["Title"] </p>
+
+        <div>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Search", "Order")'"> <i class="fs-5 bi bi-search"></i> </button>
+            <button type="submit" value="info" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-info-lg"></i> </button>
+            <button type="submit" value="check" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-shield-check"></i> </button>
+            <button type="submit" value="approve" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-clipboard-check"></i> </button>
+            <button type="submit" value="delete" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-trash-fill"></i> </button>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="mb-auto">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    @foreach (string column in (string[]) @ViewData["Column"])
+                    {
+                        <th scope="col">@column</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.CheckBoxFor(m => m[i].Checked, new { @class="form-check-input" }) </td>
+                        <td>@Html.HiddenFor(m => m[i].OrderId) @Html.DisplayFor(m => m[i].OrderId)</td>
+                        <td>@Html.HiddenFor(m => m[i].OrderId) @Html.DisplayFor(m => m[i].OrderId)</td>
+                        <td>@Html.HiddenFor(m => m[i].OrderId) @Html.DisplayFor(m => m[i].OrderId)</td>
+                        <td>@Html.HiddenFor(m => m[i].CustomerUsername) @Html.DisplayFor(m => m[i].CustomerUsername)</td>
+                        <td>@Html.HiddenFor(m => m[i].HandlerUsername) @Html.DisplayFor(m => m[i].HandlerUsername)</td>
+                        <td>@Html.HiddenFor(m => m[i].TotalPrice) @Html.DisplayFor(m => m[i].TotalPrice)</td>
+                        <td>@Html.HiddenFor(m => m[i].Quantity) @Html.DisplayFor(m => m[i].Quantity)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+</div>
+}
