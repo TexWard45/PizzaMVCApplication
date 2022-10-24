@@ -27,5 +27,7 @@ namespace PizzaMVCApplication.Entity
         public string Phone { get; set; }
         [MaxLength(320)]
         public string Email { get; set; }
+        public IEnumerable<Order> CustomerOrders { get; set; }
+        public IEnumerable<Order> HandlerOrders { get; set; }
     }
 }
