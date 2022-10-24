@@ -21,4 +21,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PizzaMVCApplication.Entity\PizzaMVCApplication.Entity.csproj" />
+    <ProjectReference Include="..\PizzaMVCApplication.Persistence\PizzaMVCApplication.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

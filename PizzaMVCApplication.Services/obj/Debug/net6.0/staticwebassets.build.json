@@ -1,11 +1,34 @@
 {
   "Version": 1,
-  "Hash": "7frxDONM9JRt4vc95u17C7ctVDT4QiXfo08u8RZ7EpE=",
+  "Hash": "SKHxTe070MdCk/I2feSzfrqRiNnZBJn3peeL4lrEx+c=",
   "Source": "PizzaMVCApplication.Services",
   "BasePath": "_content/PizzaMVCApplication.Services",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Entity\\PizzaMVCApplication.Entity.csproj",
+      "Version": 2,
+      "Source": "PizzaMVCApplication.Entity",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier"
+    },
+    {
+      "Identity": "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Persistence\\PizzaMVCApplication.Persistence.csproj",
+      "Version": 2,
+      "Source": "PizzaMVCApplication.Persistence",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

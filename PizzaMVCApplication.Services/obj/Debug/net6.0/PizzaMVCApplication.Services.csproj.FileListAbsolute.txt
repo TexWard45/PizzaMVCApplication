@@ -303,3 +303,8 @@ D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication.Services\obj\De
 D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication.Services\obj\Debug\net6.0\PizzaMVCApplication.Services.pdb
 D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication.Services\obj\Debug\net6.0\PizzaMVCApplication.Services.genruntimeconfig.cache
 D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication.Services\obj\Debug\net6.0\ref\PizzaMVCApplication.Services.dll
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication.Services\bin\Debug\net6.0\PizzaMVCApplication.Entity.dll
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication.Services\bin\Debug\net6.0\PizzaMVCApplication.Persistence.dll
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication.Services\bin\Debug\net6.0\PizzaMVCApplication.Entity.pdb
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication.Services\bin\Debug\net6.0\PizzaMVCApplication.Persistence.pdb
+D:\VisualStudioWorkspace\PizzaMVCApplication\PizzaMVCApplication.Services\obj\Debug\net6.0\PizzaMVCApplication.Services.csproj.CopyComplete

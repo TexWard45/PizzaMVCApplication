@@ -1,0 +1,61 @@
+﻿@model IEnumerable<UserIndexViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+    ViewData["Type"] = "User";
+    ViewData["Title"] = "Quản lý tài khoản";
+    ViewData["Column"] = new string[] {
+        "Tên tài khoản",
+        "Nhóm tài khoản",
+        "Họ tên",
+        "Trạng thái"
+    };
+}
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex flex-column p-3 h-100">
+    <div class="d-flex justify-content-between align-items-center">
+        <p class="h3 m-0"> @ViewData["Title"] </p>
+
+        <div>
+            <button type="button" class="btn btn-dark"> <i class="fs-5 bi bi-search"></i> </button>
+            <button type="button" class="btn btn-dark"> <i class="fs-5 bi bi-info-lg"></i> </button>
+            <button type="button" class="btn btn-dark"> <i class="fs-5 bi bi-plus-lg"></i> </button>
+            <button type="button" class="btn btn-dark"> <i class="fs-5 bi bi-pencil-fill"></i> </button>
+            <button type="button" class="btn btn-dark"> <i class="fs-5 bi bi-trash-fill"></i> </button>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="mb-auto">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    @foreach (string column in (string[])@ViewData["Column"])
+                    {
+                        <th scope="col">@column</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <th> <input class="form-check-input" type="checkbox" value="@obj.Username" name="@obj.Username"> </th>
+                        <td>@obj.Username</td>
+                        <td>@obj.GroupDisplay</td>
+                        <td>@obj.Fullname</td>
+                        <td><span class="badge bg-success">Mở</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+</div>
