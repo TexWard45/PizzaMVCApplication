@@ -4,10 +4,10 @@ namespace PizzaMVCApplication.Services
 {
     public interface IOrderService
     {
-        public Order GetById(int GroupId);
+        public Order GetById(int OrderId);
         public Task UpdateAsync(Order order);
         public Task DeleteAsync(int OrderId);
-        public IEnumerable<Order> Search(Order order);
+        public IEnumerable<Order> Search(DateTime startDay, DateTime endDay);
         public IEnumerable<Order> GetAll();
     }
 }

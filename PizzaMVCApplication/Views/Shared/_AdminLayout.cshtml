@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PizzaApplication.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.min.css" />
 </head>
 <body>
     <div class="container-fluid">
@@ -88,9 +89,25 @@
             </div>
         </div>
     </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-3-6-1/jquery.js"></script>
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/lib/jqueryui/jquery-ui.min.js"></script>
+    
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $('.datepicker').datepicker({
+				    dateFormat: 'dd/MM/yyyy',
+                    changeMonth: true,
+                    changeYear: true,
+                    showOn: 'button',
+                    buttonText: 'show',
+			    });
+            })
+    </script>
+    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

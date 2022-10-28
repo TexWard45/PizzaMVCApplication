@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "MT/pqo/nP8Jwv2iGeCIGQX5bvwQL4Ekm3QkGaIq7v/UtTDN+9zrMchwf/eYbSAQdA2ChkfNDQpnxoVQas1HDCw==",
+  "dgSpecHash": "tDZNjAqAGkJRC4g+kWT6QaRHmJgcBwIrHOgFscXityY8x2/j6igQ6oxLxOB4+sdE6ClcXSc4qbUla2yNI+ueKw==",
   "success": true,
   "projectFilePath": "E:\\document\\MVC\\pizzaMVC\\PizzaMVCApplication\\PizzaMVCApplication\\PizzaMVCApplication.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\jquery\\3.6.0\\jquery.3.6.0.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\jquery.ui.combined\\1.13.2\\jquery.ui.combined.1.13.2.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.9\\microsoft.aspnet.mvc.5.2.9.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.9\\microsoft.aspnet.razor.3.2.9.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnet.webpages\\3.2.9\\microsoft.aspnet.webpages.3.2.9.nupkg.sha512",

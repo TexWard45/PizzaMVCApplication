@@ -28,5 +28,6 @@ namespace PizzaMVCApplication.Entity
         public int OrderType { get; set; }
         public DateTime OrderTime { get; set; }
         public string Note { get; set; }
+
     }
 }

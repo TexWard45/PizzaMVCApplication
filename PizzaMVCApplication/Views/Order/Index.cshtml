@@ -14,6 +14,7 @@
         "Tổng giá",
         "Tổng số lượng"
     };
+    
 }
 
 @{
@@ -49,17 +50,43 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 0; i < Model.Count; i++)
+                @foreach (var obj in Model)
                 {
-                    <tr>
-                        <td>@Html.CheckBoxFor(m => m[i].Checked, new { @class="form-check-input" }) </td>
-                        <td>@Html.HiddenFor(m => m[i].OrderId) @Html.DisplayFor(m => m[i].OrderId)</td>
-                        <td>@Html.HiddenFor(m => m[i].OrderId) @Html.DisplayFor(m => m[i].OrderId)</td>
-                        <td>@Html.HiddenFor(m => m[i].OrderId) @Html.DisplayFor(m => m[i].OrderId)</td>
-                        <td>@Html.HiddenFor(m => m[i].CustomerUsername) @Html.DisplayFor(m => m[i].CustomerUsername)</td>
-                        <td>@Html.HiddenFor(m => m[i].HandlerUsername) @Html.DisplayFor(m => m[i].HandlerUsername)</td>
-                        <td>@Html.HiddenFor(m => m[i].TotalPrice) @Html.DisplayFor(m => m[i].TotalPrice)</td>
-                        <td>@Html.HiddenFor(m => m[i].Quantity) @Html.DisplayFor(m => m[i].Quantity)</td>
+                        
+                       
+                      
+                     <tr>
+                        <td>@Html.CheckBoxFor(m => @obj.Checked, new { @class="form-check-input" }) </td>
+                            <td>@Html.HiddenFor(m => @obj.OrderId) @Html.DisplayFor(m => @obj.OrderId)</td>
+                            <td>
+                            @{
+                                if (@obj.EndStatus?.StatusId > 6)
+                                {
+                                        <span class="btn btn-warning fw-bold">@Html.HiddenFor(m => @obj.EndStatus!.Display) @Html.DisplayFor(m => @obj.EndStatus!.Display)</span>
+                                }
+                                else if (@obj.EndStatus?.StatusId < 6)
+                                {
+                                        <span class="btn btn-danger text-white fw-bold">@Html.HiddenFor(m => @obj.EndStatus!.Display) @Html.DisplayFor(m => @obj.EndStatus!.Display)</span>
+                                } else {
+                                    <span class="btn btn-success text-white fw-bold">@Html.HiddenFor(m => @obj.EndStatus!.Display) @Html.DisplayFor(m => @obj.EndStatus!.Display)</span>
+                                }
+                             }
+                             </td>
+                            <td>@Html.HiddenFor(m => @obj.StartStatusDetail.TimeCreated) @Html.DisplayFor(m => @obj.StartStatusDetail.TimeCreated)</td>
+                            @{
+                                ViewData["LastTime"] = "Chưa xử lý";
+                                if (@obj.EndStatusDetail?.StatusId != 1)
+                                {
+                                    <td>@Html.HiddenFor(m => @obj.EndStatusDetail.TimeCreated) @Html.DisplayFor(m => @obj.EndStatusDetail.TimeCreated)</td>
+                                } else {
+                                    <td>@Html.HiddenFor(m => ViewData["LastTime"]) @ViewData["LastTime"]</td>
+                                }
+                            }
+                            
+                            <td>@Html.HiddenFor(m => @obj.CustomerUsername) @Html.DisplayFor(m => @obj.CustomerUsername)</td>
+                            <td>@Html.HiddenFor(m => @obj.HandlerUsername) @Html.DisplayFor(m => @obj.HandlerUsername)</td>
+                        <td>@Html.HiddenFor(m => @obj.TotalPrice) @Html.DisplayFor(m => @obj.TotalPrice)</td>
+                        <td>@Html.HiddenFor(m => @obj.Quantity) @Html.DisplayFor(m => @obj.Quantity)</td>
                     </tr>
                 }
             </tbody>
