@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<ToppingIndexViewModel>
+
+@{
+    ViewData["Title"] = "Admin Page";
+    ViewData["Type"] = "Topping";
+    ViewData["Title"] = "Quản lý nhóm nhân bánh";
+    ViewData["Column"] = new string[] {
+        "Mã nhân bánh",
+        "Tên nhân bánh",
+    };
+}
+
+@{
+    Layout = "_AdminLayout";
+}
+
+@using (Html.BeginForm("Index", "Topping", FormMethod.Post))
+{
+    <div class="d-flex flex-column p-3 h-100">
+        <div class="d-flex justify-content-between align-items-center">
+            <p class="h3 m-0"> @ViewData["Title"] </p>
+
+            <div>
+                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Search", "UserGroup")'"> <i class="fs-5 bi bi-search"></i> </button>
+                <button type="submit" value="info" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-info-lg"></i> </button>
+                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Create", "UserGroup")'"> <i class="fs-5 bi bi-plus-lg"></i> </button>
+                <button type="submit" value="edit" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-pencil-fill"></i> </button>
+                <button type="submit" value="delete" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-trash-fill"></i> </button>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="mb-auto">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        @foreach (string column in (string[])@ViewData["Column"])
+                        {
+                            <th scope="col">@column</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@Html.CheckBoxFor(m => @obj.Checked, new { @class="form-check-input" }) </td>
+                            <td>@Html.HiddenFor(m => @obj.ToppingId) @Html.DisplayFor(m =>  @obj.ToppingId)</td>
+                            <td>@Html.HiddenFor(m => @obj.Display) @Html.DisplayFor(m =>  @obj.Display)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <hr />
+    </div>
+}

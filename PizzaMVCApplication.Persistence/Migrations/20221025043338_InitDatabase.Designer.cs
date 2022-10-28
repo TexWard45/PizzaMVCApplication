@@ -12,7 +12,7 @@ using PizzaMVCApplication.Persistence;
 namespace PizzaMVCApplication.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221024122740_InitDatabase")]
+    [Migration("20221025043338_InitDatabase")]
     partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
