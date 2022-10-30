@@ -8,5 +8,6 @@ namespace PizzaMVCApplication.Entity
         public int? ToppingId { get; set; }
         [MaxLength(255)]
         public string Display { get; set; }
+
     }
 }

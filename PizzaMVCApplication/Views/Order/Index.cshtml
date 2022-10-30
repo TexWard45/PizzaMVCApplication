@@ -1,7 +1,6 @@
 ﻿@model IList<OrderIndexViewModel>
 
 @{
-    ViewData["Title"] = "Home Page";
     ViewData["Type"] = "Order";
     ViewData["Title"] = "Quản lý đơn hàng";
     ViewData["Column"] = new string[] {
@@ -23,16 +22,25 @@
 
 @using (Html.BeginForm("Index", "Order", FormMethod.Post))
 {
+
 <div class="d-flex flex-column p-3 h-100">
     <div class="d-flex justify-content-between align-items-center">
         <p class="h3 m-0"> @ViewData["Title"] </p>
 
         <div>
             <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Search", "Order")'"> <i class="fs-5 bi bi-search"></i> </button>
-            <button type="submit" value="info" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-info-lg"></i> </button>
-            <button type="submit" value="check" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-shield-check"></i> </button>
-            <button type="submit" value="approve" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-clipboard-check"></i> </button>
-            <button type="submit" value="delete" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-trash-fill"></i> </button>
+            <button type="button" class="btn btn-dark popUpModal" data-operation="ToInfo">
+                <i class="fs-5 bi bi-info-lg"></i> 
+            </button>
+            <button type="button" class="btn btn-dark popUpModal" data-operation="ToCheck">
+                <i class="fs-5 bi bi-shield-check"></i>
+            </button>
+            <button type="button" class="btn btn-dark popUpModal" data-operation="ToApprove">
+                <i class="fs-5 bi bi-clipboard-check"></i>
+            </button>
+            <button type="button" class="btn btn-dark popUpModal" data-operation="ToDelete">
+                <i class="fs-5 bi bi-trash-fill"></i>
+            </button>
         </div>
     </div>
 
@@ -50,49 +58,109 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var obj in Model)
-                {
-                        
-                       
-                      
-                     <tr>
-                        <td>@Html.CheckBoxFor(m => @obj.Checked, new { @class="form-check-input" }) </td>
-                            <td>@Html.HiddenFor(m => @obj.OrderId) @Html.DisplayFor(m => @obj.OrderId)</td>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr class="orderItem">
+                            <td>@Html.CheckBoxFor(m => m[i].Checked, new { @class="form-check-input checkbox" }) </td>
+                            <td>@Html.HiddenFor(m => m[i].OrderId, new { @class="IdOrder" }) @Html.DisplayFor(m => m[i].OrderId)</td>
                             <td>
-                            @{
-                                if (@obj.EndStatus?.StatusId > 6)
-                                {
-                                        <span class="btn btn-warning fw-bold">@Html.HiddenFor(m => @obj.EndStatus!.Display) @Html.DisplayFor(m => @obj.EndStatus!.Display)</span>
+                                @Html.HiddenFor(m => m[i].EndStatus!.Display)
+                                @{
+                                    if (Model[i].EndStatus?.StatusId > 6)
+                                    {
+                                                                                   <span class="btn btn-danger fw-bold"> @Html.DisplayFor(m => m[i].EndStatus!.Display)</span>
+                                    }
+                                    else if (Model[i].EndStatus?.StatusId < 6)
+                                    {
+                                                                                   <span class="btn btn-warning text-white fw-bold"> @Html.DisplayFor(m => m[i].EndStatus!.Display)</span>
+                                    }
+                                    else
+                                    {
+                                                                                   <span class="btn btn-success text-white fw-bold"> @Html.DisplayFor(m => m[i].EndStatus!.Display)</span>
+                                    }
                                 }
-                                else if (@obj.EndStatus?.StatusId < 6)
-                                {
-                                        <span class="btn btn-danger text-white fw-bold">@Html.HiddenFor(m => @obj.EndStatus!.Display) @Html.DisplayFor(m => @obj.EndStatus!.Display)</span>
-                                } else {
-                                    <span class="btn btn-success text-white fw-bold">@Html.HiddenFor(m => @obj.EndStatus!.Display) @Html.DisplayFor(m => @obj.EndStatus!.Display)</span>
-                                }
-                             }
-                             </td>
-                            <td>@Html.HiddenFor(m => @obj.StartStatusDetail.TimeCreated) @Html.DisplayFor(m => @obj.StartStatusDetail.TimeCreated)</td>
+                            </td>                       
+                            <td>@Html.HiddenFor(m => m[i].StartStatusDetail.TimeCreated) @Html.DisplayFor(m => m[i].StartStatusDetail.TimeCreated)</td>
                             @{
                                 ViewData["LastTime"] = "Chưa xử lý";
-                                if (@obj.EndStatusDetail?.StatusId != 1)
+                                if (Model[i].EndStatusDetail?.StatusId != 1)
                                 {
-                                    <td>@Html.HiddenFor(m => @obj.EndStatusDetail.TimeCreated) @Html.DisplayFor(m => @obj.EndStatusDetail.TimeCreated)</td>
-                                } else {
-                                    <td>@Html.HiddenFor(m => ViewData["LastTime"]) @ViewData["LastTime"]</td>
+                                                                                                                             <td>@Html.HiddenFor(m => m[i].EndStatusDetail.TimeCreated) @Html.DisplayFor(m => m[i].EndStatusDetail.TimeCreated)</td>
+                                }
+                                else
+                                {
+                                                                                                                            <td>@Html.HiddenFor(m => ViewData["LastTime"]) @ViewData["LastTime"]</td>
                                 }
                             }
-                            
-                            <td>@Html.HiddenFor(m => @obj.CustomerUsername) @Html.DisplayFor(m => @obj.CustomerUsername)</td>
-                            <td>@Html.HiddenFor(m => @obj.HandlerUsername) @Html.DisplayFor(m => @obj.HandlerUsername)</td>
-                        <td>@Html.HiddenFor(m => @obj.TotalPrice) @Html.DisplayFor(m => @obj.TotalPrice)</td>
-                        <td>@Html.HiddenFor(m => @obj.Quantity) @Html.DisplayFor(m => @obj.Quantity)</td>
-                    </tr>
-                }
+                            <td>@Html.HiddenFor(m => m[i].CustomerUsername) @Html.DisplayFor(m => m[i].CustomerUsername)</td>
+                            <td>@Html.HiddenFor(m => m[i].HandlerUsername) @Html.DisplayFor(m => m[i].HandlerUsername)</td>
+                            <td>@Html.HiddenFor(m => m[i].TotalPrice) @Html.DisplayFor(m => m[i].TotalPrice)</td>
+                            <td>@Html.HiddenFor(m => m[i].Quantity) @Html.DisplayFor(m => m[i].Quantity)</td>
+                        </tr>
+                    }
+                   
             </tbody>
         </table>
     </div>
-
+        
     <hr />
+        <div id="PlaceHolder">
+            
+        </div>
+
 </div>
+
+
+
+}
+
+
+@section scripts{
+    <script>
+        var PlaceHolderElement = $('#PlaceHolder')
+        function getSelects() {
+            let arrIdOrder = [];
+
+            $('.orderItem').each(function (index, value) {
+                var checkedNode = value.querySelector('.checkbox');
+                var itemIdNode = value.querySelector('.IdOrder');
+                if (checkedNode.checked) {
+                    arrIdOrder.push(itemIdNode.value);
+                }
+            });
+
+            return arrIdOrder;
+        }
+
+
+        function isEmptySelect() {
+            return getSelects().length == 0;
+        }
+
+        function uncheckAll() {
+            $('.checkbox').prop('checked', false);
+        }
+
+        $('.popUpModal').click(function () {
+            var arr = getSelects();
+            if(arr.length > 1){
+                alert("Không thể chọn nhiều dòng cùng lúc");
+                return;
+            }
+
+            if (arr.length == 0) {
+                alert("Chọn ít nhất 1 dòng để thao tác");
+                return;
+            }
+            var operation = $(this)[0].dataset.operation;
+            var url = '@Url.Action("Action", "Order")';
+            url = url.replace("Action", operation);
+            $.get(url, $.param({ data: arr }, true), function (data) {
+                PlaceHolderElement.html(data);
+                PlaceHolderElement.find(".modal").modal('show');
+                uncheckAll();
+            });
+        
+        })
+    </script>
 }

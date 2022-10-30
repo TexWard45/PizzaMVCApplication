@@ -14,6 +14,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserGroupService, UserGroupService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IStatusService, StatusService>();
+builder.Services.AddScoped<IPizzaService, PizzaService>();
+builder.Services.AddScoped<ISizeService, SizeService>();
+builder.Services.AddScoped<IBaseService, BaseService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

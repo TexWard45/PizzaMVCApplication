@@ -1,0 +1,129 @@
+﻿@model OrderInfoViewModel
+<div id="InfoOrderModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <form class="payment-form" onsubmit="return false;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> Thông tin đơn đặt hàng </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="fw-bold"> Họ tên khách hàng: <span class="fw-lighter">@Model.Fullname</span></div>
+                    <div class="fw-bold"> Địa chỉ giao hàng: <span class="fw-lighter">@Model.Address</span></div>
+                    <div class="fw-bold"> Số điện thoại liên lạc: <span class="fw-lighter">@Model.Phone</span> </div>
+                    <div class="fw-bold">
+                        Phương thức thanh toán:
+                        <span class="fw-lighter">
+                            @{
+                                if(Model.PaymentType == 0){
+                                    ViewData["DisPlayPayMent"] = "Tiền mặt";
+                                }
+                                else if (Model.PaymentType == 1)
+                                {
+                                    ViewData["DisPlayPayMent"] = "ATM";
+                                }
+                                else if (Model.PaymentType == 2)
+                                {
+                                    ViewData["DisPlayPayMent"] = "Momo";
+                                }
+                                else if (Model.PaymentType == 0)
+                                {
+                                    ViewData["DisPlayPayMent"] = "ShoppePay";
+                                }
+                                else if (Model.PaymentType == 0)
+                                {
+                                    ViewData["DisPlayPayMent"] = "ZaloPay";
+                                }
+                            }
+                            @ViewData["DisPlayPayMent"]
+                        </span>
+                    </div>
+                    <div class="fw-bold">
+                        Thời gian giao hàng:
+                        <span class="fw-lighter">
+                            @{
+
+                                ViewData["DisPlayTime"] = "";
+                                if(Model.OrderType == 0){
+                                    ViewData["DisPlayTime"] = "Giao hàng ngay";
+                                } else {
+                                    ViewData["DisPlayTime"] = "Giao vào lúc " + Model.OrderTime;
+                                }
+                            }
+                            @ViewData["DisPlayTime"]
+                        </span>
+                    </div>
+                    <div class="fw-bold"> Chú thích: <div class="fw-lighter"> @Model.Note </div> </div>
+                    <hr />
+                    <div class="fw-bold"> Trạng thái đơn hàng </div>
+                    <div>
+                        <div class="float-start fw-bold"> Trạng thái </div>
+                        <div class="float-end fw-bold"> Thời gian xử lý </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    @{
+                        for(int i = 0; i< Model.ListStatusDetail.Count(); i++){  
+                            if (Model.ListStatusDetail.ElementAt(i)!= null){
+                                <div>
+                                    <div class="float-start">@Model.ListStatus.Where(status => status.StatusId == i+1).SingleOrDefault().Display </div>
+                                    <div class="float-end"> @Model.ListStatusDetail.ElementAt(i).TimeCreated</div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            } else {
+                                <div>
+                                    <div class="float-start">@Model.ListStatus.Where(status => status.StatusId == i+1).SingleOrDefault().Display</div>
+                                    <div class="float-end"> Trống </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            }
+                        }
+                    }
+                  
+                    <hr />
+                    <div class="fw-bold"> Chi tiết đơn hàng </div>
+                    <div>
+                        <div class="float-start fw-bold"> Pizza </div>
+                        <div class="float-end fw-bold"> Giá </div>
+                        <div class="clearfix"> </div>
+                    </div>
+
+                    
+
+                    @{
+                        for (int i = 0; i < Model.OrderDetailViewModel.Count(); i++){
+                            <div>
+                                <div class="float-start">
+                                    @Model.OrderDetailViewModel.ElementAt(i).DisplayPizza x @Model.OrderDetailViewModel.ElementAt(i).Quantity
+                                </div>
+                                <div class="float-end"> @Model.OrderDetailViewModel.ElementAt(i).Amount </div>
+                                <div class="clearfix"> </div>
+                            </div>
+
+                            <div>
+                                <div class="float-start">
+                                    Kích thước @Model.OrderDetailViewModel.ElementAt(i).DisplaySize, 
+                                    Đế @Model.OrderDetailViewModel.ElementAt(i).DisplayBase
+                                </div>
+                                <div class="float-end"> </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        }
+                    }
+                    
+
+                    <hr />
+
+                    <div>
+                        <div class="float-start fw-bold"> Tổng tiền </div>
+                        <div class="float-end"> @Model.Total </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+      

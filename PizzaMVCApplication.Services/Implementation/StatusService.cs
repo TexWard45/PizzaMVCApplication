@@ -1,5 +1,6 @@
 ﻿using PizzaMVCApplication.Entity;
 using PizzaMVCApplication.Persistence;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace PizzaMVCApplication.Services.Implementation
@@ -22,7 +23,12 @@ namespace PizzaMVCApplication.Services.Implementation
             return _context.Status.ToList();
         }
 
-        public Status GetById(int? OrderId)
+        public Status GetById(int? StatusId)
+        {
+            return _context.Status.Where(e => e.StatusId == StatusId).FirstOrDefault();
+        }
+
+        public Status GetByOrderId(int? OrderId)
         {
             int StatusId = GetLastStatusDetail(OrderId).StatusId;
             return _context.Status.Where(e => e.StatusId == StatusId).FirstOrDefault();
@@ -50,6 +56,16 @@ namespace PizzaMVCApplication.Services.Implementation
                 obj => obj.OrderId == OrderId
              ).OrderByDescending(value => value.StatusId).FirstOrDefault();
             return Detail;
+        }
+
+        public IEnumerable<StatusDetail> GetListStatusDetail(int? OrderId, int Length)
+        {
+            List<StatusDetail> newList = new List<StatusDetail>();
+            for (int i = 1; i <= Length; i++) {
+                StatusDetail statusDetail = this.GetByStatusId(OrderId, i);
+                newList.Add(statusDetail);
+            }
+            return newList;    
         }
 
         public IEnumerable<Status> Search(Status status)

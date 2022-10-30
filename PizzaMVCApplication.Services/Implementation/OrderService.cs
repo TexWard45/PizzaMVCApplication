@@ -3,6 +3,8 @@ using PizzaMVCApplication.Entity;
 using PizzaMVCApplication.Persistence;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Text.RegularExpressions;
+
 namespace PizzaMVCApplication.Services.Implementation
 {
     public class OrderService : IOrderService
@@ -25,9 +27,17 @@ namespace PizzaMVCApplication.Services.Implementation
             return _context.Orders.ToList();
         }
 
-        public Order GetById(int OrderId)
+        public Order GetById(int? OrderId)
         {
-            throw new NotImplementedException();
+            return _context.Orders.Where(e => e.OrderId == OrderId!).FirstOrDefault();
+        }
+
+        public IEnumerable<OrderDetail> GetListOrderDetail(int? OrderId)
+        {
+            IEnumerable<OrderDetail> newList = _context.OrderDetails.ToList().Where(
+                obj => obj.OrderId == OrderId 
+             ).OrderByDescending(value => value.OrderDetailId);
+            return newList;
         }
 
         public IEnumerable<Order> Search(DateTime startDay, DateTime endDay)
@@ -57,6 +67,12 @@ namespace PizzaMVCApplication.Services.Implementation
         public Task UpdateAsync(Order order)
         {
             throw new NotImplementedException();
+        }
+
+        // thành tiền
+        public Decimal GetAmount(Decimal Price, int Quantity)
+        {
+            return Price * Quantity;
         }
     }
 }
