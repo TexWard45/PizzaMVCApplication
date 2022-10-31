@@ -1,16 +1,8 @@
 ﻿@{
 
-    int OrderId = (int)ViewBag.OrderId;
-    ViewData["Title"] = "Home Page";
-    ViewData["Type"] = "Order";
-    ViewData["Title"] = "Quản lý đơn hàng";
-  
+    int OrderId = (int)ViewBag.OrderId; 
 }
-@{
-    Layout = "_AdminLayout";
-}
-@using (Html.BeginForm("Index", "Order", FormMethod.Post))
-{
+
     <div id="CheckOrderModal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -18,35 +10,12 @@
                     <h5 class="modal-title"> Kiểm tra đơn hàng? </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
+                
                 <div class="modal-footer">
-                    <button type="button" class=" btn btn-success check-form"> Kiểm tra </button>
+                    <button type="button" class=" btn btn-success check-form" value="@OrderId"> Kiểm tra </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Đóng </button>
                 </div>
             </div>
         </div>
     </div>
-}
 
-
-@section scripts{
-    <script>
-        $(".check-form").click(function () {
-            $.ajax({
-                url: "@Url.Action("Check", "Order")",
-                method: "POST",
-                data: { id: @OrderId},
-                success: function (response) {
-                    if (response == "success") {
-                        alert("Đơn hàng đủ điều kiện để xử lý!");
-                        $(".modal").modal("hide");
-                        //reloadAdmin();
-                    } else {
-                        alert(response);
-                        $(".modal").modal("hide");
-                    }
-                }
-                });
-            });
-    </script>
-}

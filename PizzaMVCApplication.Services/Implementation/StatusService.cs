@@ -13,6 +13,18 @@ namespace PizzaMVCApplication.Services.Implementation
             _context = context;
         }
 
+        public async Task CreateAsync(Status Status)
+        {
+            await _context.Status.AddAsync(Status);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task CreateStatusDetailAsync(StatusDetail StatusDetail)
+        {
+            await _context.StatusDetails.AddAsync(StatusDetail);
+            await _context.SaveChangesAsync();
+        }
+
         public Task DeleteAsync(int StatusId)
         {
             throw new NotImplementedException();
@@ -76,6 +88,12 @@ namespace PizzaMVCApplication.Services.Implementation
         public Task UpdateAsync(Status status)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task UpdateStatusDetailAsync(StatusDetail StatusDetail)
+        {
+            await _context.StatusDetails.AddAsync(StatusDetail);
+            await _context.SaveChangesAsync();
         }
     }
 }
