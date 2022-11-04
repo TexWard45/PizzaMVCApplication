@@ -70,31 +70,6 @@ namespace PizzaMVCApplication.Controllers
             return View("Index", newModel.ToList());
         }
 
-        public IActionResult ToCheck(List<int> data)
-        {      
-            if (data.Count>0)
-            {
-                ViewBag.OrderId = data[0];           
-                return PartialView("_ModalViewCheck");
-            }
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Check(int OrderId)
-        {
-            string result = "";
-            StatusDetail EndStatusDetail = _statusService.GetLastStatusDetail(OrderId);
-            if (EndStatusDetail.StatusId == 6) {
-                result = "Không thể kiểm tra đơn hàng đã hoàn tất!";
-            }
-            if (EndStatusDetail.StatusId == 7) {
-                result = "Không thể kiểm tra đơn hàng đã bị hủy!";     
-            }
-            IEnumerable<OrderDetail> listOrderDetail = _orderService.GetListOrderDetail(OrderId);
-            return Content(result);
-        }
 
         public IActionResult ToInfo(List<int> data)
         {
@@ -149,6 +124,153 @@ namespace PizzaMVCApplication.Controllers
                 return PartialView("_ModalViewInfo", infoModel);
             }
             return RedirectToAction("Index");
+        }
+
+
+        public IActionResult ToCheck(List<int> data)
+        {      
+            if (data.Count>0)
+            {
+                ViewBag.OrderId = data[0];           
+                return PartialView("_ModalViewCheck");
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        public IActionResult ToApprove(List<int> data)
+        {
+            if (data.Count > 0)
+            {
+                ViewBag.OrderId = data[0];
+                return PartialView("_ModalViewApprove");
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult ToDeny(List<int> data)
+        {
+            if (data.Count > 0)
+            {
+                ViewBag.OrderId = data[0];
+                return PartialView("_ModalViewDeny");
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public async Task<ContentResult> Deny(int OrderId)
+        {
+            string result;
+            StatusDetail EndStatusDetail = _statusService.GetLastStatusDetail(OrderId);
+            if (EndStatusDetail.StatusId == 7)
+            {
+                result = "Đơn hàng này đã bị hủy trước đó!";
+                return Content(result);
+            }
+            if (EndStatusDetail.StatusId >= 2)
+            {
+                result = "Không thể hủy đơn hàng đã xử lý!";
+                return Content(result);
+            }
+            
+            await _statusService.UpdateStatusDetailAsync(new StatusDetail
+            {
+                StatusId = 7,
+                OrderId = OrderId,
+                TimeCreated = DateTime.Now,
+            });
+
+            result = "Hủy đơn hàng thành công!";
+            return Content(result);
+        }
+
+
+        [HttpPost]
+        public async Task<ContentResult> Approve(int OrderId)
+        {
+            string result;
+            StatusDetail EndStatusDetail = _statusService.GetLastStatusDetail(OrderId);
+            if (EndStatusDetail.StatusId == 6)
+            {
+                result = "Đơn hàng đã hoàn tất!";
+                return Content(result);
+            }
+            if (EndStatusDetail.StatusId == 7)
+            {
+                result = "Đơn hàng đã bị hủy!";
+                return Content(result);
+            }
+
+            IEnumerable<OrderDetail> listOrderDetail = _orderService.GetListOrderDetail(OrderId);
+            foreach (var OrderDetail in listOrderDetail)
+            {
+                PizzaDetail pizzaDetail = _pizzaService.GetByPizzaDetailId(OrderDetail.PizzaDetailId);
+                if (pizzaDetail.Quantity - OrderDetail.Quantity < 0)
+                {
+                    result = "Đơn hàng không đủ nguyên liệu làm bánh!";
+                    return Content(result);
+                }
+            }
+
+            int nextStatusId = EndStatusDetail.StatusId + 1;
+            /*if(nextStatusId > 2 && nextStatusId <=6)
+            {
+                string oldHandler = _orderService.GetById(OrderId).HandlerUsername;
+            }*/
+
+            foreach (var OrderDetail in listOrderDetail)
+            {
+                PizzaDetail pizzaDetail = OrderDetail.PizzaDetail;
+                int quantity = OrderDetail.Quantity;
+                pizzaDetail.Quantity -= quantity;
+                await _pizzaService.UpdatePizzaDetail(pizzaDetail);
+            }
+
+            Order order = _orderService.GetById(OrderId);
+            order.HandlerUsername = "admin";
+            await _orderService.UpdateAsync(order);
+
+            await _statusService.UpdateStatusDetailAsync(new StatusDetail
+            {
+                StatusId = nextStatusId,
+                OrderId = OrderId,
+                TimeCreated = DateTime.Now,
+            });
+
+            result = "Xử lý đơn hàng thành công!";
+            return Content(result);
+        }
+
+
+        [HttpPost]
+        public ContentResult Check(int OrderId)
+        {
+            string result;
+            StatusDetail EndStatusDetail = _statusService.GetLastStatusDetail(OrderId);
+            if (EndStatusDetail.StatusId == 6) {
+                result = "Đơn hàng đã hoàn tất!";
+                return Content(result);
+            } 
+            if (EndStatusDetail.StatusId == 7) {
+                result = "Đơn hàng đã bị hủy!";
+                return Content(result);
+            }
+
+            IEnumerable<OrderDetail> listOrderDetail = _orderService.GetListOrderDetail(OrderId);
+            foreach(var OrderDetail in listOrderDetail)
+            {
+                PizzaDetail pizzaDetail = _pizzaService.GetByPizzaDetailId(OrderDetail.PizzaDetailId);
+                if (pizzaDetail.Quantity - OrderDetail.Quantity < 0) {
+                    result = "Đơn hàng không đủ nguyên liệu làm bánh!";
+                    return Content(result);
+                }
+            }
+
+
+            result = "Đơn hàng đủ điều kiện để xử lý!";
+            return Content(result);
         }
 
 
