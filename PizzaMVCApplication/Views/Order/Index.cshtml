@@ -38,7 +38,7 @@
             <button type="button" class="btn btn-dark popUpModal" data-operation="ToApprove">
                 <i class="fs-5 bi bi-clipboard-check"></i>
             </button>
-            <button type="button" class="btn btn-dark popUpModal" data-operation="ToDeny">
+            <button type="button" class="btn btn-dark popUpModal" data-operation="ToDelete">
                 <i class="fs-5 bi bi-trash-fill"></i>
             </button>
         </div>
@@ -68,15 +68,15 @@
                                 @{
                                     if (Model[i].EndStatus?.StatusId > 6)
                                     {
-                                                                                                           <span class="btn btn-danger fw-bold"> @Html.DisplayFor(m => m[i].EndStatus!.Display)</span>
+                                                                                   <span class="btn btn-danger fw-bold"> @Html.DisplayFor(m => m[i].EndStatus!.Display)</span>
                                     }
                                     else if (Model[i].EndStatus?.StatusId < 6)
                                     {
-                                                                                                           <span class="btn btn-warning text-white fw-bold"> @Html.DisplayFor(m => m[i].EndStatus!.Display)</span>
+                                                                                   <span class="btn btn-warning text-white fw-bold"> @Html.DisplayFor(m => m[i].EndStatus!.Display)</span>
                                     }
                                     else
                                     {
-                                                                                                           <span class="btn btn-success text-white fw-bold"> @Html.DisplayFor(m => m[i].EndStatus!.Display)</span>
+                                                                                   <span class="btn btn-success text-white fw-bold"> @Html.DisplayFor(m => m[i].EndStatus!.Display)</span>
                                     }
                                 }
                             </td>                       
@@ -85,11 +85,11 @@
                                 ViewData["LastTime"] = "Chưa xử lý";
                                 if (Model[i].EndStatusDetail?.StatusId != 1)
                                 {
-                                                                                                                                                     <td>@Html.HiddenFor(m => m[i].EndStatusDetail.TimeCreated) @Html.DisplayFor(m => m[i].EndStatusDetail.TimeCreated)</td>
+                                                                                                                             <td>@Html.HiddenFor(m => m[i].EndStatusDetail.TimeCreated) @Html.DisplayFor(m => m[i].EndStatusDetail.TimeCreated)</td>
                                 }
                                 else
                                 {
-                                                                                                                                                    <td>@Html.HiddenFor(m => ViewData["LastTime"]) @ViewData["LastTime"]</td>
+                                                                                                                            <td>@Html.HiddenFor(m => ViewData["LastTime"]) @ViewData["LastTime"]</td>
                                 }
                             }
                             <td>@Html.HiddenFor(m => m[i].CustomerUsername) @Html.DisplayFor(m => m[i].CustomerUsername)</td>
@@ -155,76 +155,12 @@
             var operation = $(this)[0].dataset.operation;
             var url = '@Url.Action("Action", "Order")';
             url = url.replace("Action", operation);
-            $.get(url, $.param({ data: arr }, true), function (response) {
-                PlaceHolderElement.html(response);
+            $.get(url, $.param({ data: arr }, true), function (data) {
+                PlaceHolderElement.html(data);
                 PlaceHolderElement.find(".modal").modal('show');
                 uncheckAll();
             });
-        });
-
-        $('#PlaceHolder').on('click', '.check-form', function () {      
-            var id = $('.check-form')[0].value;
-            var url = '@Url.Action("Check", "Order")';
-            if (id !== null) {
-                $.ajax({
-                    url: url +'?OrderId=' + id,
-                    dataType: "json",
-                    type: "POST",
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (response) {
-                        $(".modal").modal("hide");
-                        alert(response);
-                    },
-                    error: function (error) {
-                        $(".modal").modal("hide");
-                        alert(error.responseText);    
-                    }
-                })
-            }      
-        });
-
-        $('#PlaceHolder').on('click', '.approve-form', function () {      
-            var id = $('.approve-form')[0].value;
-            var url = '@Url.Action("Approve", "Order")';
-            if (id !== null) {
-                $.ajax({
-                    url: url +'?OrderId=' + id,
-                    dataType: "json",
-                    type: "POST",
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (response) {
-                        $(".modal").modal("hide");
-                        alert(response);
-                    },
-                    error: function (error) {
-                        $(".modal").modal("hide");
-                        alert(error.responseText);    
-                    }
-                })
-            }      
-        });
-
-        $('#PlaceHolder').on('click', '.deny-form', function () {
-            var id = $('.deny-form')[0].value;
-            var url = '@Url.Action("Deny", "Order")';
-            if (id !== null) {
-                $.ajax({
-                    url: url + '?OrderId=' + id,
-                    dataType: "json",
-                    type: "POST",
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (response) {
-                        $(".modal").modal("hide");
-                        alert(response);
-                    },
-                    error: function (error) {
-                        $(".modal").modal("hide");
-                        alert(error.responseText);
-                    }
-                })
-            }
-        });
         
-            
+        })
     </script>
 }

@@ -6,11 +6,8 @@ namespace PizzaMVCApplication.Services
     {
         public Status GetById(int? StatusId);
         public Status GetByOrderId(int? OrderId);
-        public Task UpdateAsync(Status Status);
-        public Task UpdateStatusDetailAsync(StatusDetail StatusDetail);
+        public Task UpdateAsync(Status status);
         public Task DeleteAsync(int StatusId);
-        public Task CreateAsync(Status Status);
-        public Task CreateStatusDetailAsync(StatusDetail StatusDetail);
         public IEnumerable<Status> Search(Status status);
         public IEnumerable<Status> GetAll();
         public StatusDetail GetByStatusId(int? OrderId, int Length);

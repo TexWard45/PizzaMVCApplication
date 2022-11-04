@@ -44,6 +44,11 @@ namespace PizzaMVCApplication.Services.Implementation
         {
             IEnumerable<Order> list = _context.Orders.ToList();
 
+            //var query = from ord in _context.Orders
+            //            join detail in _context.StatusDetails on ord.OrderId equals detail.OrderId
+            //            where detail.StatusId == 1 && detail.TimeCreated >= startDay && detail.TimeCreated <= endDay
+            //            select new Order
+
             List<Order> newList = new List<Order>();
             foreach (Order order in list) {
                 StatusDetail status = _statusService.GetFirstStatusDetail(order.OrderId);
@@ -59,13 +64,15 @@ namespace PizzaMVCApplication.Services.Implementation
             return newList;
         }
 
-        public async Task UpdateAsync(Order order)
+        public Task UpdateAsync(Order order)
         {
-            _context.Update(order);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-
-        
+        // thành tiền
+        public Decimal GetAmount(Decimal Price, int Quantity)
+        {
+            return Price * Quantity;
+        }
     }
 }

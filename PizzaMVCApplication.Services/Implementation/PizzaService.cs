@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PizzaMVCApplication.Entity;
 using PizzaMVCApplication.Persistence;
-using System.Text.RegularExpressions;
 
 namespace PizzaMVCApplication.Services.Implementation
 {
@@ -12,11 +11,9 @@ namespace PizzaMVCApplication.Services.Implementation
         {
             _context = context;
         }
-        public async Task DeleteAsync(int PizzaId)
+        public Task DeleteAsync(int PizzaId)
         {
-            var pizza = GetById(PizzaId);
-            _context.Remove(pizza);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public Pizza GetById(int? PizzaId)
@@ -29,16 +26,9 @@ namespace PizzaMVCApplication.Services.Implementation
             return _context.PizzaDetails.Where(e => e.Id == PizzaDetailId).FirstOrDefault();
         }
 
-        public async Task UpdateAsync(Pizza Pizza)
+        public Task UpdateAsync(Pizza Pizza)
         {
-            _context.Update(Pizza);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task UpdatePizzaDetail(PizzaDetail PizzaDetail)
-        {
-            _context.Update(PizzaDetail);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
     }
 }
