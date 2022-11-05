@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cjjFE0by3ta/NMhncd/jjOBU+riJfKF4veUKBD1TKRIZurSKTqzAo+sSQfmiXwjKivvfByPpaZNV9GhIZP982A==",
+  "dgSpecHash": "JNDU9qjCnBS80tuTcS5yMksmQrDnQWhYuT0us/5uYGDzJeVTIkMyfNPfGJLXIRTe7iQeIus8AsTEgJnyAc6xYg==",
   "success": true,
-  "projectFilePath": "D:\\github\\PizzaMVCApplication\\PizzaMVCApplication.Entity\\PizzaMVCApplication.Entity.csproj",
+  "projectFilePath": "D:\\github\\PizzaMVCApplication\\PizzaMVCApplication.Services\\PizzaMVCApplication.Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thang\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\thang\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\6.0.10\\microsoft.aspnetcore.mvc.razor.extensions.6.0.10.nupkg.sha512",

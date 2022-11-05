@@ -18,22 +18,22 @@ namespace PizzaMVCApplication.Services.Implementation
             return _context.Bases.Where(e => e.BaseId == BaseId).FirstOrDefault();
         }
 
-        public async Task CreateAsync(Base base)
+        public async Task CreateAsync(Base Base)
         {
-            await _context.Bases.AddAsync(base);
+            await _context.Bases.AddAsync(Base);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Base base)
+        public async Task UpdateAsync(Base Base)
         {
-            _context.Update(base);
+            _context.Update(Base);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int BaseId)
         {
-            var base = GetById(BaseId);
-            _context.Remove(base);
+            var Base = GetById(BaseId);
+            _context.Remove(Base);
             await _context.SaveChangesAsync();
         }
 
@@ -41,18 +41,18 @@ namespace PizzaMVCApplication.Services.Implementation
         {
             foreach (int BaseId in BaseIdList)
             {
-                var base = GetById(BaseId);
-                _context.Remove(base);
+                var Base = GetById(BaseId);
+                _context.Remove(Base);
             }
             await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<Base> Search(Base base)
+        public IEnumerable<Base> Search(Base Base)
         {
             IEnumerable<Base> list = _context.Bases.ToList();
-
-            int? BaseId = base.BaseId;
-            string Display = base.Display;
+            
+            int? BaseId = Base.BaseId;
+            string Display = Base.Display;
 
             if (BaseId != null || Display != null)
             {

@@ -54,7 +54,7 @@ namespace PizzaMVCApplication.Services.Implementation
             int? SizeId = size.SizeId;
             string Display = size.Display;
 
-            if (GroupId != null || Display != null)
+            if (SizeId != null || Display != null)
             {
                 return list.Where(obj =>
                         (SizeId != null && ("" + obj.SizeId).Contains("" + SizeId)) ||

@@ -12,6 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
     ));
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserGroupService, UserGroupService>();
+builder.Services.AddScoped<ISizeService, SizeService>();
+builder.Services.AddScoped<IBaseService, BaseService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

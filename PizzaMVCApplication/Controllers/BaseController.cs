@@ -10,20 +10,20 @@ namespace PizzaMVCApplication.Controllers
 {
     public class BaseController : Controller
     {
-        private readonly IBaseService _baseService;
+        private readonly IBaseService _BaseService;
         private readonly IWebHostEnvironment _hostingEnvironment;
-        public BaseController(IBaseService baseService, IWebHostEnvironment hostingEnvironment)
+        public BaseController(IBaseService BaseService, IWebHostEnvironment hostingEnvironment)
         {
-            _baseService = baseService;
+            _BaseService = BaseService;
             _hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
         {
-            var model = _baseService.GetAll().Select(base => new BaseIndexViewModel
+            var model = _BaseService.GetAll().Select(Base => new BaseIndexViewModel
             {
-                BaseId = base.BaseId,
-                Display = base.Display
+                BaseId = Base.BaseId,
+                Display = Base.Display
             });
             return View(model.ToList());
         }
@@ -55,12 +55,12 @@ namespace PizzaMVCApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(BaseCreateViewModel model)
         {
-            Base base = new Base
+            Base Base = new Base
             {
                 BaseId = model.BaseId,
                 Display = model.Display
             };
-            await _baseService.CreateAsync(base);
+            await _BaseService.CreateAsync(Base);
             return RedirectToAction("Create");
         }
 
@@ -72,16 +72,16 @@ namespace PizzaMVCApplication.Controllers
         [HttpGet]
         public IActionResult SearchModel(BaseSearchViewModel model)
         {
-            Base base = new Base
+            Base Base = new Base
             {
                 BaseId = model.BaseId,
                 Display = model.Display
             };
-            IEnumerable<Base> list = _baseService.Search(base);
-            var newModel = list.Select(base => new BaseIndexViewModel
+            IEnumerable<Base> list = _BaseService.Search(Base);
+            var newModel = list.Select(Base => new BaseIndexViewModel
             {
-                BaseId = base.BaseId,
-                Display = base.Display
+                BaseId = Base.BaseId,
+                Display = Base.Display
             });
             return View("Index", newModel.ToList());
         }
@@ -94,7 +94,7 @@ namespace PizzaMVCApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> Info(BaseInfoViewModel model)
         {
-            Base base = new Base
+            Base Base = new Base
             {
                 BaseId = model.BaseId,
                 Display = model.Display
@@ -110,7 +110,7 @@ namespace PizzaMVCApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(BaseEditViewModel model, string buttonType)
         {
-            Base base = new Base
+            Base Base = new Base
             {
                 BaseId = model.BaseId,
                 Display = model.Display
@@ -118,7 +118,7 @@ namespace PizzaMVCApplication.Controllers
 
             if (buttonType == "edit")
             {
-                await _baseService.UpdateAsync(base);
+                await _BaseService.UpdateAsync(Base);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -127,11 +127,11 @@ namespace PizzaMVCApplication.Controllers
         [HttpGet]
         public IActionResult Edit(int BaseId)
         {
-            var base = _baseService.GetById(BaseId);
+            var Base = _BaseService.GetById(BaseId);
             var model = new BaseEditViewModel()
             {
-                BaseId = (int) base.BaseId,
-                Display = base.Display
+                BaseId = (int)Base.BaseId,
+                Display = Base.Display
             };
             return View(model);
         }
@@ -144,7 +144,7 @@ namespace PizzaMVCApplication.Controllers
             {
                 BaseInfoViewModel infoModel = new BaseInfoViewModel
                 {
-                    BaseId = (int) obj.BaseId,
+                    BaseId = (int)obj.BaseId,
                     Display = obj.Display
                 };
                 return View("Info", infoModel);
@@ -156,11 +156,12 @@ namespace PizzaMVCApplication.Controllers
         public IActionResult DirectToEdit(IList<BaseIndexViewModel> model)
         {
             BaseIndexViewModel obj = getFirstCheckedModel(model);
-            
-            if (obj != null) {
+
+            if (obj != null)
+            {
                 BaseEditViewModel editModel = new BaseEditViewModel
                 {
-                    BaseId = (int) obj.BaseId,
+                    BaseId = (int)obj.BaseId,
                     Display = obj.Display
                 };
                 return View("Edit", editModel);
@@ -178,7 +179,7 @@ namespace PizzaMVCApplication.Controllers
         {
             List<int> list = getCheckedIdList(model);
 
-            _baseService.DeleteAsync(list);
+            _BaseService.DeleteAsync(list);
         }
 
         public List<int> getCheckedIdList(IList<BaseIndexViewModel> model)
@@ -188,7 +189,7 @@ namespace PizzaMVCApplication.Controllers
             {
                 if (obj.Checked)
                 {
-                    list.Add((int) obj.BaseId);
+                    list.Add((int)obj.BaseId);
                 }
             }
             return list;
