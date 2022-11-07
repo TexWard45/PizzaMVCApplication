@@ -19,6 +19,16 @@ namespace PizzaMVCApplication.Services.Implementation
             await _context.SaveChangesAsync();
         }
 
+        public IEnumerable<Pizza> GetAll()
+        {
+            return _context.Pizzas.ToList();
+        }
+
+        public IEnumerable<PizzaDetail> GetAllDetail()
+        {
+            return _context.PizzaDetails.ToList();
+        }
+
         public Pizza GetById(int? PizzaId)
         {
             return _context.Pizzas.Where(e => e.Id == PizzaId).FirstOrDefault();

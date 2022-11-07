@@ -9,6 +9,7 @@ namespace PizzaMVCApplication.Services
         public Task DeleteAsync(int OrderId);
         public IEnumerable<Order> Search(DateTime StartDay, DateTime EndDay);
         public IEnumerable<Order> GetAll();
+        public IEnumerable<OrderDetail> GetAllDetail();
         public IEnumerable<OrderDetail> GetListOrderDetail(int? OrderId);
     }
 }

@@ -1,0 +1,86 @@
+﻿@model StatisticByCategoryViewModel
+
+
+@{
+    ViewData["Type"] = "Statistic";
+    Layout = "_AdminLayout";
+}
+<div class="p-3">
+    <div class="d-flex justify-content-between">
+        <div class="title">
+            <span class="h3"> Thống kê doanh thu theo danh mục bánh pizza  </span>
+        </div>
+
+        <div class="operation">
+            <button type="button" class="btn btn-dark popUpModal" data-operation="ToSearchCategory" >
+                <i class="fs-5 bi bi-search"></i> 
+            </button>
+        </div>
+    </div>
+    <hr />
+
+    <div class="table-overflow">
+        <table class="table">
+            <tr>
+                <th> Tổng doanh thu thực tế </th>
+                <th> Tổng doanh thu dự kiến </th>
+                <th> Tổng số lượng bán được thực tế </th>
+                <th> Tổng số lượng bán được dự kiến </th>
+            </tr>
+
+           
+            <tr>
+                <td> @Model.TotalActualRevenue </td>
+                <td> @Model.TotalExpectedRevenue </td>
+                <td> @Model.TotalActualSales </td>
+                <td> @Model.TotalExpectedSales </td>
+            </tr>
+        </table>
+
+        <div class="table-overflow">
+            <table class="table">
+                <tr>
+                    <th> Tên danh mục </th>
+                    <th> Doanh thu thực tế </th>
+                    <th> Doanh thu dự kiến </th>
+                    <th> Số lượng bán được thực tế </th>
+                    <th> Số lượng bán được dự kiến </th>
+                </tr>
+                @{
+                    for(int i=0 ;i<Model.Categories.Count(); i++){
+                            <tr>
+                                <td> @Model.Categories.ElementAt(i).Display </td>
+                                <td> @Model.ActualRevenue.ElementAt(i) </td>
+                                <td> @Model.ExpectedRevenue.ElementAt(i) </td>
+                                <td> @Model.ActualSales.ElementAt(i) </td>
+                                <td> @Model.ExpectedSales.ElementAt(i) </td>
+                            </tr>
+                    }
+                }
+                
+                
+               
+            </table>
+        </div>
+
+        <div id="PlaceHolder">
+
+        </div>
+
+    </div>
+
+@section scripts{
+    <script>
+        var PlaceHolderElement = $('#PlaceHolder');
+        $(".popUpModal").click(function () {
+            let operation = $(this)[0].dataset.operation;
+            var url = '@Url.Action("Action", "Statistic")';
+            url = url.replace("Action", operation);
+                $.get(url,  function (response) {
+                    PlaceHolderElement.html(response);
+                    PlaceHolderElement.find(".modal").modal('show');
+                   
+                });
+        });
+    </script>
+}

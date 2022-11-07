@@ -3,6 +3,7 @@ using PizzaMVCApplication.Entity;
 using PizzaMVCApplication.Persistence;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace PizzaMVCApplication.Services.Implementation
@@ -25,6 +26,11 @@ namespace PizzaMVCApplication.Services.Implementation
         public IEnumerable<Order> GetAll()
         {
             return _context.Orders.ToList();
+        }
+
+        public IEnumerable<OrderDetail> GetAllDetail()
+        {
+            return _context.OrderDetails.ToList();
         }
 
         public Order GetById(int? OrderId)
@@ -58,6 +64,8 @@ namespace PizzaMVCApplication.Services.Implementation
 
             return newList;
         }
+
+       
 
         public async Task UpdateAsync(Order order)
         {

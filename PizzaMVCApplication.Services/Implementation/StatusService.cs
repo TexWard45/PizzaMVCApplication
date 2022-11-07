@@ -35,6 +35,11 @@ namespace PizzaMVCApplication.Services.Implementation
             return _context.Status.ToList();
         }
 
+        public IEnumerable<StatusDetail> GetAllDetail()
+        {
+            return _context.StatusDetails.ToList();
+        }
+
         public Status GetById(int? StatusId)
         {
             return _context.Status.Where(e => e.StatusId == StatusId).FirstOrDefault();
