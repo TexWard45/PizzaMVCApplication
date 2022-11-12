@@ -197,7 +197,7 @@ namespace PizzaMVCApplication.Controllers
         }
 
         
-        public IActionResult ToSearchCategory(int Id)
+        public IActionResult ToSearchCategory()
         {
             OrderSearchViewModel objSearchView = new OrderSearchViewModel()
             {

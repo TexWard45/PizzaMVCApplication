@@ -10,9 +10,31 @@ namespace PizzaMVCApplication.Services.Implementation
         {
             _context = context;
         }
-        public Task DeleteAsync(int CategoryId)
+
+        public async Task CreateAsync(Category Category)
         {
-            throw new NotImplementedException();
+            await _context.Categories.AddAsync(Category);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int CategoryId)
+        {
+            var category = GetById(CategoryId);
+            _context.Remove(category);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteCategories(List<int> ArrayId)
+        {    
+            for(int i = 0; i < ArrayId.Count; i++)
+            {
+                var pizza = _context.Pizzas.Where(e => e.CategoryId == ArrayId[i]).ToList();
+                if (pizza.Count > 0)
+                    continue;
+                var category = GetById(ArrayId[i]);
+                _context.Remove(category);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public IEnumerable<Category> GetAll()
@@ -22,12 +44,23 @@ namespace PizzaMVCApplication.Services.Implementation
 
         public Category GetById(int? CategoryId)
         {
-            throw new NotImplementedException();
+            return _context.Categories.Where(e => e.CategoryId == CategoryId).FirstOrDefault();
         }
 
-        public Task UpdateAsync(Category Category)
+        public Category GetByName(string Display)
         {
-            throw new NotImplementedException();
+            return _context.Categories.Where(e => e.Display.Equals(Display)).SingleOrDefault();
+        }
+
+        public IEnumerable<Category> SearchByName(string Display)
+        {
+            return _context.Categories.Where(e => e.Display.Contains(Display)).ToList();
+        }
+
+        public async Task UpdateAsync(Category Category)
+        {
+            _context.Update(Category);
+            await _context.SaveChangesAsync();
         }
     }
 }
