@@ -1,0 +1,25 @@
+﻿@model ToppingViewModel
+@using (Html.BeginForm("AddTopping", "Topping", FormMethod.Post))
+{
+    <div id="InfoCategoryModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <form class="add-form" onsubmit="return false;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"> Thêm nhân bánh </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="fw-bold"> Tên nhân bánh: </div>
+                        @Html.EditorFor(model => model.Display)
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class=" btn btn-primary"> Thêm </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Đóng </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}

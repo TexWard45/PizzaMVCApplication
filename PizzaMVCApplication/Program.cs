@@ -18,7 +18,7 @@ builder.Services.AddScoped<IPizzaService, PizzaService>();
 builder.Services.AddScoped<ISizeService, SizeService>();
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-
+builder.Services.AddScoped<IToppingService, ToppingService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

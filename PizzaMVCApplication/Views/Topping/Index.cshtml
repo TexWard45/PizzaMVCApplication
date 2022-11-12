@@ -1,0 +1,124 @@
+﻿@model IList<ToppingIndexViewModel>
+@{
+    ViewData["Type"] = "Topping";
+    ViewData["Title"] = "Quản lý nhân bánh";
+    ViewData["Column"] = new string[] {
+        "Mã nhân bánh",
+        "Tên nhân bánh"
+    };
+}
+
+@{
+    Layout = "_AdminLayout";
+}
+
+
+<div class="d-flex flex-column p-3 h-100">
+    <div class="d-flex justify-content-between align-items-center">
+        <p class="h3 m-0"> @ViewData["Title"] </p>
+
+        <div>
+            <button type="button" class="btn btn-dark popUpModal" data-operation="ToSearch"> 
+                <i class="fs-5 bi bi-search"></i> 
+            </button>
+            <button type="button" class="btn btn-dark popUpModal" data-operation="ToInfo"> 
+                <i class="fs-5 bi bi-info-lg"></i> 
+             </button>
+            <button type="button" class="btn btn-dark popUpModal" data-operation="ToAdd">
+                <i class="fs-5 bi bi-plus-lg"></i>
+            </button>
+            <button type="button" class="btn btn-dark popUpModal" data-operation="ToEdit"> 
+                <i class="fs-5 bi bi-pencil-fill"></i>
+            </button>
+            <button type="button" class="btn btn-dark popUpModal" data-operation="ToDelete">
+                <i class="fs-5 bi bi-trash-fill"></i>
+            </button>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="mb-auto">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    @foreach (string column in (string[])@ViewData["Column"])
+                    {
+                        <th scope="col">@column</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr class="categoryItem">
+                        <td>@Html.CheckBoxFor(m => m[i].Checked, new { @class="form-check-input checkbox" }) </td>
+                        <td>@Html.HiddenFor(m => m[i].ToppingId, new { @class="ToppingId" }) @Html.DisplayFor(m => m[i].ToppingId)</td>
+                        <td>@Html.HiddenFor(m => m[i].Display) @Html.DisplayFor(m => m[i].Display)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+     <div id="PlaceHolder">
+            
+        </div>
+</div>
+
+
+@section scripts{
+    <script>
+        var PlaceHolderElement = $('#PlaceHolder')
+        function getSelects() {
+            let arrIdOrder = [];
+
+            $('.categoryItem').each(function (index, value) {
+                var checkedNode = value.querySelector('.checkbox');
+                var itemIdNode = value.querySelector('.ToppingId');
+                if (checkedNode.checked) {
+                    arrIdOrder.push(itemIdNode.value);
+                }
+            });
+
+            return arrIdOrder;
+        }
+
+
+        function isEmptySelect() {
+            return getSelects().length == 0;
+        }
+
+        function uncheckAll() {
+            $('.checkbox').prop('checked', false);
+        }
+
+        $('.popUpModal').click(function () {
+            var arr = getSelects();
+            var operation = $(this)[0].dataset.operation;
+            if ((operation == "ToEdit" || operation == "ToInfo") && (arr.length > 1)) {
+                alert("Không thể chọn nhiều dòng cùng lúc");
+                return;
+            }
+
+            if ((operation == "ToEdit" || operation == "ToInfo" || operation=="ToDelete") && (arr.length == 0)) {
+                alert("Chọn ít nhất 1 dòng để thao tác");
+                return;
+            }
+            var url = '@Url.Action("Action", "Topping")';
+            url = url.replace("Action", operation);
+            
+        
+            $.get(url, $.param({ data: arr }, true), function (response) {
+                
+                PlaceHolderElement.html(response);
+                PlaceHolderElement.find(".modal").modal('show');
+                uncheckAll();
+            });
+        });
+
+ 
+    </script>
+}
