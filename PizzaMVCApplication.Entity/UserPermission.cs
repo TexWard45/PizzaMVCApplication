@@ -13,11 +13,10 @@ namespace PizzaMVCApplication.Entity
         [Key]
         public int Id { get; set; }
         [ForeignKey("User")]
-        public string UserId { get; set; }
+        public string Username { get; set; }
         public User User { get; set; }
         [MaxLength(255)]
         public string Permission { get; set; }
-        [Range(0, 1)]
-        public int Value { get; set; }
+        public string Value { get; set; }
     }
 }

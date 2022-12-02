@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Type"] = (ViewData["Type"] == null) ? "" : @ViewData["Type"]; 
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,12 +14,13 @@
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PizzaApplication.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.min.css" />
 </head>
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white justify-content-between h-100">
                     <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="fs-5 d-none d-sm-inline">Menu</span>
                     </a>
@@ -45,11 +51,6 @@
                             </a>
                         </li>
                         <li class="w-100">
-                            <a class="nav-link text-white py-1 align-middle @(@ViewData["Type"].ToString() == "Topping" ? "active" : "")" asp-area="" asp-controller="Topping" asp-action="Index">
-                                <i class="fs-4 fa-solid fa-tomato"></i> <span class="ms-1 d-none d-sm-inline">Nhân bánh</span>
-                            </a>
-                        </li>
-                        <li class="w-100">
                             <a class="nav-link text-white py-1 align-middle @(@ViewData["Type"].ToString() == "Pizza" ? "active" : "")" asp-area="" asp-controller="Pizza" asp-action="Index">
                                 <i class="fs-4 fa-solid fa-pizza-slice"></i> <span class="ms-1 d-none d-sm-inline">Bánh pizza</span>
                             </a>
@@ -68,17 +69,10 @@
                     <hr>
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">Test</span>
+                            <span class="d-none d-sm-inline mx-1">Admin</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                            <li><a class="dropdown-item" href="#">New project...</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
                         </ul>
                     </div>
                 </div>
@@ -88,9 +82,25 @@
             </div>
         </div>
     </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/lib/jqueryui/jquery-ui.min.js"></script>
+    
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $('.datepicker').datepicker({
+				    dateFormat: 'dd/MM/yyyy',
+                    changeMonth: true,
+                    changeYear: true,
+                    showOn: 'button',
+                    buttonText: 'show',
+			    });
+            })
+    </script>
+    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

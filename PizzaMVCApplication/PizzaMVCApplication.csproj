@@ -27,4 +27,15 @@
     <ProjectReference Include="..\PizzaMVCApplication.Services\PizzaMVCApplication.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\User\Create.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\User\Edit.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

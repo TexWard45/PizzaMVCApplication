@@ -1,4 +1,5 @@
-﻿using PizzaMVCApplication.Entity;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using PizzaMVCApplication.Entity;
 
 namespace PizzaMVCApplication.Services
 {
@@ -11,5 +12,7 @@ namespace PizzaMVCApplication.Services
         public Task DeleteAsync(List<int> GroupIdList);
         public IEnumerable<UserGroup> Search(UserGroup userGroup);
         public IEnumerable<UserGroup> GetAll();
+        public IEnumerable<SelectListItem> GetAllToSelectListItem();
+        public IEnumerable<SelectListItem> GetAllToSelectListItem(int GroupIdSelected);
     }
 }

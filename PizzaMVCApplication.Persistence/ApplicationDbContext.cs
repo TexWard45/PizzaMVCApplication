@@ -18,16 +18,14 @@ namespace PizzaMVCApplication.Persistence
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<UserPermission> UserPermisions { get; set; }
+        public DbSet<UserPermission> UserPermissions { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }
         public DbSet<UserGroupPermission> UserGroupPermissions { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Topping> Toppings { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Base> Bases { get; set; }
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<PizzaDetail> PizzaDetails { get; set; }
-        public DbSet<ToppingDetail> ToppingDetails { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Status> Status { get; set; }
@@ -39,12 +37,6 @@ namespace PizzaMVCApplication.Persistence
             {
                 u.OrderId,
                 u.StatusId
-            });
-
-            modelBuilder.Entity<ToppingDetail>().HasKey(u => new
-            {
-                u.PizzaId,
-                u.ToppingId
             });
 
             modelBuilder.Entity<Order>()

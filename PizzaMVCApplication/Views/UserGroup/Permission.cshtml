@@ -1,0 +1,54 @@
+﻿@model UserGroupPermissionViewModel
+
+@{
+	ViewData["Title"] = "Home Page";
+	ViewData["Type"] = "UserGroup";
+	ViewData["Title"] = "Phân quyền nhóm tài khoản";
+}
+
+@{
+	Layout = "_AdminLayout";
+}
+
+@using (Html.BeginForm("Permission", "UserGroup", FormMethod.Post))
+{
+<div class="d-flex flex-column p-3 h-100">
+    <div class="d-flex justify-content-between align-items-center">
+        <p class="h3 m-0"> @ViewData["Title"] </p>
+
+        <div>
+			<button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Index", "UserGroup")'"> <i class="fs-5 bi bi-arrow-return-left"></i> </button>
+        </div>
+    </div>
+
+    <hr />
+
+	<div class="mb-auto">
+		<div class="mb-3">
+			<label asp-for="GroupId"> Mã nhóm </label>
+			<input asp-for="GroupId" class="form-control" readonly/>
+			<span asp-validation-for="GroupId" class="text-danger"> </span>
+		</div>
+
+		<div class="mb-3">
+			<label asp-for="GroupDisplay"> Tên nhóm </label>
+			<input asp-for="GroupDisplay" class="form-control" readonly />
+			<span asp-validation-for="GroupDisplay" class="text-danger"> </span>
+		</div>
+
+		@foreach (PermissionModel PermissionModel in Model.Permissions)
+		{
+		<div class="mb-3">
+			<label> @PermissionModel.Label </label>
+			<div>
+				<input id="@(PermissionModel.Name)Yes" name="@(PermissionModel.Name)" type="radio" value="true" @(Model.ValueOf(PermissionModel.Name) == "true" ? "checked" : "") />
+				<label for="@(PermissionModel.Name)Yes" class="me-5"> Có </label>
+				<input id="@(PermissionModel.Name)No" name="@(PermissionModel.Name)" type="radio" value="false" @(Model.ValueOf(PermissionModel.Name) == "false" ? "checked" : "") />
+				<label for="@(PermissionModel.Name)No"> Không </label>
+			</div>
+		</div>
+		}
+		<button type="submit" value="permission" name="buttonType" class="btn btn-primary" style="width: 150px"> Phân quyền </button>
+    </div>
+</div>
+}

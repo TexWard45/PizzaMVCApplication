@@ -1,0 +1,73 @@
+﻿@model UserCreateViewModel
+
+@{
+	ViewData["Title"] = "Home Page";
+	ViewData["Type"] = "User";
+	ViewData["Title"] = "Tạo tài khoản";
+}
+
+@{
+	Layout = "_AdminLayout";
+}
+
+<div class="d-flex flex-column p-3 h-100">
+    <div class="d-flex justify-content-between align-items-center">
+        <p class="h3 m-0"> @ViewData["Title"] </p>
+
+        <div>
+			<button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Index", "User")'"> <i class="fs-5 bi bi-arrow-return-left"></i> </button>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="mb-auto">
+        <form method="post">
+			<div class="mb-3">
+				<label asp-for="Username"> Tên tài khoản </label>
+				<input asp-for="Username" class="form-control" value="@Model.Username" />
+				<span asp-validation-for="Username" class="text-danger"> </span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Password"> Mật khẩu </label>
+				<input asp-for="Password" type="password" class="form-control" value="@Model.Password" />
+				<span asp-validation-for="Password" class="text-danger"> </span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="RetypePassword"> Nhập lại mật khẩu </label>
+				<input asp-for="RetypePassword" type="password" class="form-control" />
+				<span asp-validation-for="RetypePassword" class="text-danger"> </span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="GroupId"> Nhóm tài khoản </label>
+				@Html.DropDownList("GroupId", Model.GroupIdList, new { @class = "form-control" })
+			</div>
+			<div class="mb-3">
+				<label asp-for="Fullname"> Họ tên </label>
+				<input asp-for="Fullname" class="form-control" value="@Model.Fullname" />
+				<span asp-validation-for="Fullname" class="text-danger"> </span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Birth"> Ngày sinh </label>
+				<input asp-for="Birth" type="date" class="form-control" />
+				<span asp-validation-for="Birth" class="text-danger"> </span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Address"> Địa chỉ </label>
+				<input asp-for="Address" class="form-control" value="@Model.Address" />
+				<span asp-validation-for="Address" class="text-danger"> </span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Phone"> Điện thoại </label>
+				<input asp-for="Phone" class="form-control" value="@Model.Phone"/>
+				<span asp-validation-for="Phone" class="text-danger"> </span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Email"> Thư điện tử </label>
+				<input asp-for="Email" class="form-control" value="@Model.Email" />
+				<span asp-validation-for="Email" class="text-danger"> </span>
+			</div>
+			<button type="submit" class="btn btn-primary" style="width: 150px"> Tạo </button>
+		</form>
+    </div>
+</div>

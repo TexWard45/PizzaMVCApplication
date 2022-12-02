@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using PizzaMVCApplication.Entity;
 using PizzaMVCApplication.Persistence;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PizzaMVCApplication.Services.Implementation
@@ -62,9 +64,46 @@ namespace PizzaMVCApplication.Services.Implementation
             }
             return list;
         }
+
         public IEnumerable<UserGroup> GetAll()
         {
             return _context.UserGroups.ToList();
+        }
+
+        public IEnumerable<SelectListItem> GetAllToSelectListItem()
+        {
+            IEnumerable<UserGroup> list = GetAll();
+
+            List<SelectListItem> selectList = new List<SelectListItem>();
+
+            foreach (UserGroup userGroup in list)
+            {
+                selectList.Add(new SelectListItem
+                {
+                    Text = userGroup.Display, Value = userGroup.GroupId.ToString()
+                });
+            }
+
+            return selectList;
+        }
+
+        public IEnumerable<SelectListItem> GetAllToSelectListItem(int GroupIdSelected)
+        {
+            IEnumerable<UserGroup> list = GetAll();
+
+            List<SelectListItem> selectList = new List<SelectListItem>();
+
+            foreach (UserGroup userGroup in list)
+            {
+                selectList.Add(new SelectListItem
+                {
+                    Text = userGroup.Display,
+                    Value = userGroup.GroupId.ToString(),
+                    Selected = userGroup.GroupId == GroupIdSelected
+                });
+            }
+
+            return selectList;
         }
     }
 }
