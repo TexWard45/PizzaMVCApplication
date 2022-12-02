@@ -11,11 +11,13 @@ namespace PizzaMVCApplication.Controllers
     public class UserGroupController : Controller
     {
         private readonly IUserGroupService _userGroupService;
+        private readonly IUserGroupPermissionService _userGroupPermissionService;
         private readonly IWebHostEnvironment _hostingEnvironment;
-        public UserGroupController(IUserGroupService userGroupService, IWebHostEnvironment hostingEnvironment)
+        public UserGroupController(IUserGroupService userGroupService, IUserGroupPermissionService userGroupPermissionService, IWebHostEnvironment hostingEnvironment)
         {
             _userGroupService = userGroupService;
             _hostingEnvironment = hostingEnvironment;
+            _userGroupPermissionService = userGroupPermissionService;
         }
 
         public IActionResult Index()
@@ -34,11 +36,15 @@ namespace PizzaMVCApplication.Controllers
         {
             if (buttonType == "delete")
             {
-                Delete(model);
+                await Delete(model);
             }
             else if (buttonType == "edit")
             {
                 return DirectToEdit(model);
+            }
+            else if (buttonType == "permission")
+            {
+                return DirectToPermission(model);
             }
             else if (buttonType == "info")
             {
@@ -107,6 +113,11 @@ namespace PizzaMVCApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Permission()
+        {
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Edit(UserGroupEditViewModel model, string buttonType)
         {
@@ -122,6 +133,19 @@ namespace PizzaMVCApplication.Controllers
                 return RedirectToAction("Index");
             }
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Permission(UserGroupPermissionViewModel Model, string ButtonType)
+        {
+            IEnumerable<UserGroupPermission> List = UserGroupPermissionViewModel.To(Model);
+
+            if (ButtonType == "permission")
+            {
+                await _userGroupPermissionService.CreateOrUpdatePermissionsAsync(List);
+                return RedirectToAction("Index");
+            }
+            return View(Model);
         }
 
         [HttpGet]
@@ -169,6 +193,24 @@ namespace PizzaMVCApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult DirectToPermission(IList<UserGroupIndexViewModel> model)
+        {
+            UserGroupIndexViewModel obj = getFirstCheckedModel(model);
+
+            if (obj != null)
+            {
+                int GroupId = (int) obj.GroupId;
+                string GroupDisplay = _userGroupService.GetById(GroupId).Display;
+                IEnumerable<UserGroupPermission> groupPermissionList = _userGroupPermissionService.GetPermissionsByGroupId(GroupId);
+
+                UserGroupPermissionViewModel permissionModel = UserGroupPermissionViewModel.From(GroupId, groupPermissionList);
+                permissionModel.GroupDisplay = GroupDisplay;
+                return View("Permission", permissionModel);
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public UserGroupIndexViewModel getFirstCheckedModel(IList<UserGroupIndexViewModel> model)
         {
             return model.Where(e => e.Checked).FirstOrDefault();
@@ -178,7 +220,7 @@ namespace PizzaMVCApplication.Controllers
         {
             List<int> list = getCheckedIdList(model);
 
-            _userGroupService.DeleteAsync(list);
+            await _userGroupService.DeleteAsync(list);
         }
 
         public List<int> getCheckedIdList(IList<UserGroupIndexViewModel> model)

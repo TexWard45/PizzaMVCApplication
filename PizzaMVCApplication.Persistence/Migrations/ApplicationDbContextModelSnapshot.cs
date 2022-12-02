@@ -188,10 +188,12 @@ namespace PizzaMVCApplication.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
-                    b.Property<int>("BaseId")
+                    b.Property<int?>("BaseId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("PizzaId")
+                    b.Property<int?>("PizzaId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -200,7 +202,8 @@ namespace PizzaMVCApplication.Persistence.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("SizeId")
+                    b.Property<int?>("SizeId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -266,39 +269,6 @@ namespace PizzaMVCApplication.Persistence.Migrations
                     b.HasIndex("StatusId");
 
                     b.ToTable("StatusDetails");
-                });
-
-            modelBuilder.Entity("PizzaMVCApplication.Entity.Topping", b =>
-                {
-                    b.Property<int?>("ToppingId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("ToppingId"), 1L, 1);
-
-                    b.Property<string>("Display")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("ToppingId");
-
-                    b.ToTable("Toppings");
-                });
-
-            modelBuilder.Entity("PizzaMVCApplication.Entity.ToppingDetail", b =>
-                {
-                    b.Property<int>("PizzaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ToppingId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PizzaId", "ToppingId");
-
-                    b.HasIndex("ToppingId");
-
-                    b.ToTable("ToppingDetails");
                 });
 
             modelBuilder.Entity("PizzaMVCApplication.Entity.User", b =>
@@ -379,8 +349,9 @@ namespace PizzaMVCApplication.Persistence.Migrations
                     b.Property<int>("UserGroupId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -402,18 +373,19 @@ namespace PizzaMVCApplication.Persistence.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(32)");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("Username");
 
-                    b.ToTable("UserPermisions");
+                    b.ToTable("UserPermissions");
                 });
 
             modelBuilder.Entity("PizzaMVCApplication.Entity.Order", b =>
@@ -509,25 +481,6 @@ namespace PizzaMVCApplication.Persistence.Migrations
                     b.Navigation("Status");
                 });
 
-            modelBuilder.Entity("PizzaMVCApplication.Entity.ToppingDetail", b =>
-                {
-                    b.HasOne("PizzaMVCApplication.Entity.Pizza", "Pizza")
-                        .WithMany()
-                        .HasForeignKey("PizzaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PizzaMVCApplication.Entity.Topping", "Topping")
-                        .WithMany()
-                        .HasForeignKey("ToppingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pizza");
-
-                    b.Navigation("Topping");
-                });
-
             modelBuilder.Entity("PizzaMVCApplication.Entity.User", b =>
                 {
                     b.HasOne("PizzaMVCApplication.Entity.UserGroup", "UserGroup")
@@ -554,7 +507,7 @@ namespace PizzaMVCApplication.Persistence.Migrations
                 {
                     b.HasOne("PizzaMVCApplication.Entity.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("Username")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

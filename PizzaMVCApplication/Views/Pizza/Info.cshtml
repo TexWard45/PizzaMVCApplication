@@ -1,0 +1,72 @@
+﻿@model PizzaInfoViewModel
+
+@{
+	ViewData["Title"] = "Home Page";
+	ViewData["Type"] = "Pizza";
+	ViewData["Title"] = "Xem bánh pizza";
+}
+
+@{
+	Layout = "_AdminLayout";
+}
+
+<style>
+	label.bold {
+		font-weight: 700
+	}
+</style>
+
+<div class="d-flex flex-column p-3 h-100">
+    <div class="d-flex justify-content-between align-items-center">
+        <p class="h3 m-0"> @ViewData["Title"] </p>
+
+        <div>
+			<button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Index", "Pizza")'"> <i class="fs-5 bi bi-arrow-return-left"></i> </button>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="mb-auto">
+		<form method="post">
+			<div class="mb-3">
+				<label asp-for="Display" class="bold"> Tên bánh </label>
+				<input asp-for="Display" class="form-control" value="@Model.Display" readonly />
+				<span asp-validation-for="Display" class="text-danger"> </span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="CategoryDisplay" class="bold"> Danh mục bánh </label>
+				<input asp-for="CategoryDisplay" class="form-control" value="@Model.CategoryDisplay" readonly />
+			</div>
+			<div class="mb-3">
+				<label asp-for="Description" class="bold"> Mô tả </label>
+				<textarea asp-for="Description" class="form-control" rows="3" readonly> </textarea>
+				<span asp-validation-for="Description" class="text-danger"> </span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="ImageUrl" class="bold"> Hình ảnh </label>
+				<img style="width: 200px; height: 200px" src="@Url.Content(Model.ImageUrl)" alt="image" />
+				<span asp-validation-for="ImageUrl" class="text-danger"> </span>
+			</div>
+			<div class="mb-3">
+				<label class="bold"> Kích thước & Đế bánh </label>
+				@for (int i = 0; i < @Model.SizeBaseList.Count(); i++)
+				{
+					<div>
+					@Html.HiddenFor(m => m.SizeBaseList[i].SizeId)
+					@Html.HiddenFor(m => m.SizeBaseList[i].BaseId)
+					<div>
+					@Html.DisplayFor(m => m.SizeBaseList[i].SizeDisplay) - @Html.DisplayFor(m => m.SizeBaseList[i].BaseDisplay)
+					</div>
+					<label> Giá </label>
+					@Html.EditorFor(m => m.SizeBaseList[i].Price, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } } )
+					<label> Số lượng </label>
+					@Html.EditorFor(m => m.SizeBaseList[i].Quantity, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } } )
+					</div>
+					<hr />
+				}
+			</div>
+			<button type="submit" class="btn btn-primary" style="width: 150px"> Tạo </button>
+		</form>
+    </div>
+</div>

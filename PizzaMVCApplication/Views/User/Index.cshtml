@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UserIndexViewModel>
+﻿@model IList<UserIndexViewModel>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -8,7 +8,10 @@
         "Tên tài khoản",
         "Nhóm tài khoản",
         "Họ tên",
-        "Trạng thái"
+        "Ngày sinh",
+        "Địa chỉ",
+        "Điện thoại",
+        "Thư điện tử"
     };
 }
 
@@ -16,22 +19,25 @@
     Layout = "_AdminLayout";
 }
 
+@using (Html.BeginForm("Index", "User", FormMethod.Post))
+{
 <div class="d-flex flex-column p-3 h-100">
     <div class="d-flex justify-content-between align-items-center">
         <p class="h3 m-0"> @ViewData["Title"] </p>
 
         <div>
-            <button type="button" class="btn btn-dark"> <i class="fs-5 bi bi-search"></i> </button>
-            <button type="button" class="btn btn-dark"> <i class="fs-5 bi bi-info-lg"></i> </button>
-            <button type="button" class="btn btn-dark"> <i class="fs-5 bi bi-plus-lg"></i> </button>
-            <button type="button" class="btn btn-dark"> <i class="fs-5 bi bi-pencil-fill"></i> </button>
-            <button type="button" class="btn btn-dark"> <i class="fs-5 bi bi-trash-fill"></i> </button>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Search", "User")'"> <i class="fs-5 bi bi-search"></i> </button>
+            <button type="submit" value="info" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-info-lg"></i> </button>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Create", "User")'"> <i class="fs-5 bi bi-plus-lg"></i> </button>
+            <button type="submit" value="edit" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-pencil-fill"></i> </button>
+            <button type="submit" value="permission" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-list-check"></i> </button>
+            <button type="submit" value="delete" name="buttonType" class="btn btn-dark"> <i class="fs-5 bi bi-trash-fill"></i> </button>
         </div>
     </div>
 
     <hr />
 
-    <div class="mb-auto">
+    <div class="mb-auto table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -43,14 +49,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var obj in Model)
+                @for (int i = 0; i < Model.Count; i++)
                 {
                     <tr>
-                        <th> <input class="form-check-input" type="checkbox" value="@obj.Username" name="@obj.Username"> </th>
-                        <td>@obj.Username</td>
-                        <td>@obj.GroupDisplay</td>
-                        <td>@obj.Fullname</td>
-                        <td><span class="badge bg-success">Mở</span></td>
+                        <td>@Html.CheckBoxFor(m => m[i].Checked, new { @class="form-check-input" }) </td>
+                        <td>@Html.HiddenFor(m => m[i].Username) @Html.DisplayFor(m => m[i].Username)</td>
+                        <td>@Html.HiddenFor(m => m[i].GroupDisplay) @Html.DisplayFor(m => m[i].GroupDisplay)</td>
+                        <td>@Html.HiddenFor(m => m[i].Fullname) @Html.DisplayFor(m => m[i].Fullname)</td>
+                        <td>@Html.HiddenFor(m => m[i].Birth) @Model[i].Birth.ToShortDateString() </td>
+                        <td>@Html.HiddenFor(m => m[i].Address) @Html.DisplayFor(m => m[i].Address)</td>
+                        <td>@Html.HiddenFor(m => m[i].Phone) @Html.DisplayFor(m => m[i].Phone)</td>
+                        <td>@Html.HiddenFor(m => m[i].Email) @Html.DisplayFor(m => m[i].Email)</td>
                     </tr>
                 }
             </tbody>
@@ -59,3 +68,4 @@
 
     <hr />
 </div>
+}

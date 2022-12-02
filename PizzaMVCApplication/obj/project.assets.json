@@ -2997,19 +2997,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
+    "C:\\Users\\nhata\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\document\\MVC\\pizzaMVC\\PizzaMVCApplication\\PizzaMVCApplication\\PizzaMVCApplication.csproj",
+      "projectUniqueName": "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication\\PizzaMVCApplication.csproj",
       "projectName": "PizzaMVCApplication",
-      "projectPath": "E:\\document\\MVC\\pizzaMVC\\PizzaMVCApplication\\PizzaMVCApplication\\PizzaMVCApplication.csproj",
-      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "E:\\document\\MVC\\pizzaMVC\\PizzaMVCApplication\\PizzaMVCApplication\\obj\\",
+      "projectPath": "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication\\PizzaMVCApplication.csproj",
+      "packagesPath": "C:\\Users\\nhata\\.nuget\\packages\\",
+      "outputPath": "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nhata\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3023,14 +3023,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "E:\\document\\MVC\\pizzaMVC\\PizzaMVCApplication\\PizzaMVCApplication.Entity\\PizzaMVCApplication.Entity.csproj": {
-              "projectPath": "E:\\document\\MVC\\pizzaMVC\\PizzaMVCApplication\\PizzaMVCApplication.Entity\\PizzaMVCApplication.Entity.csproj"
+            "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Entity\\PizzaMVCApplication.Entity.csproj": {
+              "projectPath": "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Entity\\PizzaMVCApplication.Entity.csproj"
             },
-            "E:\\document\\MVC\\pizzaMVC\\PizzaMVCApplication\\PizzaMVCApplication.Persistence\\PizzaMVCApplication.Persistence.csproj": {
-              "projectPath": "E:\\document\\MVC\\pizzaMVC\\PizzaMVCApplication\\PizzaMVCApplication.Persistence\\PizzaMVCApplication.Persistence.csproj"
+            "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Persistence\\PizzaMVCApplication.Persistence.csproj": {
+              "projectPath": "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Persistence\\PizzaMVCApplication.Persistence.csproj"
             },
-            "E:\\document\\MVC\\pizzaMVC\\PizzaMVCApplication\\PizzaMVCApplication.Services\\PizzaMVCApplication.Services.csproj": {
-              "projectPath": "E:\\document\\MVC\\pizzaMVC\\PizzaMVCApplication\\PizzaMVCApplication.Services\\PizzaMVCApplication.Services.csproj"
+            "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Services\\PizzaMVCApplication.Services.csproj": {
+              "projectPath": "D:\\VisualStudioWorkspace\\PizzaMVCApplication\\PizzaMVCApplication.Services\\PizzaMVCApplication.Services.csproj"
             }
           }
         }
@@ -3093,7 +3093,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   },

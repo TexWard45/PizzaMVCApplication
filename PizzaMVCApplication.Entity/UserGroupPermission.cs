@@ -18,7 +18,6 @@ namespace PizzaMVCApplication.Entity
         public UserGroup UserGroup { get; set; }
         [MaxLength(255)]
         public string Permission { get; set; }
-        [Range(0, 1)]
-        public int Value { get; set; }
+        public string Value { get; set; }
     }
 }
